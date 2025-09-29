@@ -19,14 +19,18 @@ type MovieCardProps = {
 export function MovieCard({ title, image, score, id }: MovieCardProps) {
   return (
     <Link href={`/seeMore/${id}`}>
-      <Card className="w-[230px] h-[440px] bg-secondary p-0 overflow-hidden gap-2 shadow-none border-none ">
+      <Card className="sm:w-[230px] w-[158px] sm:h-[440px] h-[309px] bg-secondary p-0 overflow-hidden gap-0 shadow-none border-none ">
         <CardContent className="p-0  ">
-          <div className="w-[230px] h-[340px]">
+          <div className="w-[158px] h-[233px] sm:w-[230px] sm:h-[340px]">
             <Image
               className="w-full h-full object-cover"
-              src={`https://image.tmdb.org/t/p/original/${image}`}
-              width={230}
-              height={340}
+              src={
+                image
+                  ? `https://image.tmdb.org/t/p/original/${image}`
+                  : "https://newsigns.com.au/cdn/shop/products/Empty.jpg?v=1744438403"
+              }
+              width={148}
+              height={233}
               alt=""
               unoptimized
             ></Image>
@@ -34,7 +38,7 @@ export function MovieCard({ title, image, score, id }: MovieCardProps) {
         </CardContent>
 
         <CardFooter className="flex flex-col items-start p-2 pt-0">
-          <CardDescription className="flex gap-0 items-center mt-2 ">
+          <CardDescription className="flex gap-0 items-center mt-[6px] ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -53,7 +57,7 @@ export function MovieCard({ title, image, score, id }: MovieCardProps) {
             <p className="text-foreground ml-[2px] text-14px">{score}</p>
             <p className="text-muted-foreground text-14px">/10</p>
           </CardDescription>
-          <CardTitle className="font-normal mt-1 ">{title}</CardTitle>
+          <CardTitle className="font-normal mt-[3px] ">{title}</CardTitle>
         </CardFooter>
       </Card>
     </Link>

@@ -1,6 +1,7 @@
 import { JSX } from "react";
 
 export type MovieType = {
+  homepage: string | undefined;
   crew: any;
   genres: {
     map(arg0: (genre: any) => JSX.Element): import("react").ReactNode;

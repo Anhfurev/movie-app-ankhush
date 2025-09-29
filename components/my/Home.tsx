@@ -13,7 +13,7 @@ export default async function Home() {
         method: "GET",
         headers: {
           accept: "application/json",
-          Authorization: `Bearer ${process.env.TMDB_ACCESS_KEY}`,
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_KEY_TMDB_ACCESS_KEY}`,
         },
       }
     );
@@ -31,40 +31,59 @@ export default async function Home() {
       <div className="justify-center">
         <SwitchPhoto move={nowPlaying.results}></SwitchPhoto>
       </div>
-      <div>
-        <div className="flex justify-between w-[1280px] m-auto mt-[92px] mb-[36px]">
-          <h2 className="text-[24px] font-bold flex justify-start">Upcoming</h2>
-          <Link href={"/seeMore"}>
+
+      <div className="max-w-[1280px] flex flex-col justify-center m-auto">
+        <div className="flex justify-between sm:w-[1280px] w-auto sm:mt-[92px] mt-[340px] sm:mb-[36px] mb-5">
+          <h2 className="text-[24px] font-bold flex justify-start sm:ml-0 ml-5">
+            Upcoming
+          </h2>
+          <Link className="sm:mr-0 mr-5" href={"/upComingMore"}>
             <button className="flex items-center px-[16px] py-[8px] pr-[0px]">
               <p>See more</p>
               <ArrowRight className="w-4 ml-2 mt-[2px]" />
             </button>
           </Link>
         </div>
-        <GenreOfMovie move={upcomingMovies.results}></GenreOfMovie>
+        <GenreOfMovie
+          className="sm:flex hidden"
+          move={upcomingMovies.results}
+        ></GenreOfMovie>
       </div>
-      <div>
-        <div className="flex justify-between w-[1280px] m-auto mt-[52px] mb-[36px]">
-          <h2 className="text-[24px] font-bold flex justify-start">Popular</h2>
-          <button className="flex items-center px-[16px] py-[8px] pr-[0px]">
-            <p>See more</p>
-            <ArrowRight className="w-4 ml-2 mt-[2px]" />
-          </button>
+      <div className="max-w-[1280px] flex flex-col justify-center m-auto">
+        <div className="flex justify-between sm:w-[1280px] w-auto  sm:mt-[52px] mt-6 sm:mb-[36px] mb-5">
+          <h2 className="text-[24px] font-bold flex justify-start sm:ml-0 ml-5">
+            Popular
+          </h2>
+          <Link href={"/popularMore"}>
+            <button className="flex items-center px-[16px] py-[8px] sm:mr-0 mr-5 pr-[0px]">
+              <p>See more</p>
+              <ArrowRight className="w-4 ml-2 mt-[2px]" />
+            </button>
+          </Link>
         </div>
         <GenreOfMovie move={getpopularMovies.results}></GenreOfMovie>
       </div>
-      <div>
-        <div className="flex justify-between w-[1280px] m-auto mt-[52px] mb-[36px]">
-          <h2 className="text-[24px] font-bold flex justify-start">
+      <div className="max-w-[1280px] flex flex-col justify-center m-auto">
+        <div className="flex justify-between sm:w-[1280px] w-auto  sm:mt-[52px] mt-6 sm:mb-[36px] mb-5">
+          <h2 className="text-[24px] font-bold flex justify-start sm:ml-0 ml-5">
             Top Rated
           </h2>
-          <button className="flex items-center px-[16px] py-[8px] pr-[0px]">
-            <p>See more</p>
-            <ArrowRight className="w-4 ml-2 mt-[2px]" />
-          </button>
+          <Link href={"/topRatedMore"}>
+            <button className="flex items-center px-[16px] py-[8px] sm:mr-0 mr-5 pr-[0px]">
+              <p>See more</p>
+              <ArrowRight className="w-4 ml-2 mt-[2px]" />
+            </button>
+          </Link>
         </div>
         <GenreOfMovie move={gettopRated.results}></GenreOfMovie>
       </div>
     </div>
   );
+}
+function getMovieVideo(arg0: any) {
+  throw new Error("Function not implemented.");
+}
+
+function setSelectedTrailer(arg0: any) {
+  throw new Error("Function not implemented.");
 }

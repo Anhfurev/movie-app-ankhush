@@ -1,85 +1,71 @@
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@radix-ui/react-popover";
-import { ChevronDown, Search } from "lucide-react";
-import React from "react";
+import { ChevronDown, Moon, Search, Sun } from "lucide-react";
+import React, { Suspense } from "react";
 import { ThemeToggler } from "./ThemeToggler";
-import { Input } from "../ui/input";
+
 import { Badge } from "@/components/my";
 import { Separator } from "../ui/separator";
 import Link from "next/link";
+import { SearchSection } from "./SearchSection";
+import { SkeletonSearch } from "./SkeletonSearch";
 
-export const Header = () => {
+import { SearchButton } from "./SearchButton";
+import { GenreTrigger } from "./genreTrigger";
+import { getMovieGenres } from "@/utils/getData";
+
+export const Header = async () => {
+  const data = await getMovieGenres();
+  const genres = data.genres;
+
   return (
     <header className="flex relative justify-center z-20">
-      <nav className="h-[59px] justify-between flex items-center w-[1280px]">
-        <Link href={"/"}>
-          <div className="flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="21"
-              viewBox="0 0 20 21"
-              fill="none"
-            >
-              <path
-                d="M5.83366 2.16675V18.8334M14.167 2.16675V18.8334M1.66699 10.5001H18.3337M1.66699 6.33341H5.83366M1.66699 14.6667H5.83366M14.167 14.6667H18.3337M14.167 6.33341H18.3337M3.48366 2.16675H16.517C17.5203 2.16675 18.3337 2.9801 18.3337 3.98341V17.0167C18.3337 18.0201 17.5203 18.8334 16.517 18.8334H3.48366C2.48034 18.8334 1.66699 18.0201 1.66699 17.0167V3.98341C1.66699 2.9801 2.48034 2.16675 3.48366 2.16675Z"
-                stroke="#4338CA"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            <p className="text-[#4338CA] italic font-extrabold ml-[8px]">
-              Movie Z
-            </p>
-          </div>
-        </Link>
-
-        <div className="flex justify-center">
-          <Popover>
-            <PopoverTrigger className="flex items-center h-[36px] border-stone-300 border rounded-md mr-[20px] py-[12px] w-[97px] justify-center ">
-              <ChevronDown className="w-[16px]" />
-              <p className="ml-[8px]">Genre</p>
-            </PopoverTrigger>
-            <PopoverContent
-              align="start"
-              className="w-[577px] h-fit bg-background p-5 rounded-md border mt-[7px]"
-            >
-              <h1 className="font-bold text-[24px] mt-0">Genres</h1>
-              <p className="text-[16px]">See lists of movies by genre</p>
-              <Separator className="mt-[20px] w-full" />
-              <div className="mt-[20px]">
-                <Badge></Badge>
-              </div>
-            </PopoverContent>
-          </Popover>
-          <div className="flex items-center">
-            <Search className="text-muted-foreground mr-[-27px] w-[12px] h-[12px]" />
-            <Popover>
-              <PopoverTrigger>
-                <div>
-                  <Input
-                    className="w-[379px] pl-8 border-stone-300 h-[36px]"
-                    type="text"
-                    placeholder="Search.."
-                  />
-                </div>
-              </PopoverTrigger>
-              <PopoverContent
-                align="start"
-                className="w-[577px]  p-5 rounded-md border mt-[7px] bg-white h-100 "
+      <nav className="h-[59px] justify-between m-auto flex items-center sm:w-[1280px] w-full">
+        <div className="sm:flex hidden">
+          <Link href={"/"}>
+            {" "}
+            <div className="items-center sm:ml-0 ml-4 flex flex-row w-fit">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="21"
+                viewBox="0 0 20 21"
+                fill="none"
               >
-                <h1 className="font-bold text-[24px] mt-0">Genres</h1>
-                <p className="text-[16px]">See lists of movies by genre</p>
-                <Separator className="mt-[20px]" />
-              </PopoverContent>
-            </Popover>
+                <path
+                  d="M5.83366 2.16675V18.8334M14.167 2.16675V18.8334M1.66699 10.5001H18.3337M1.66699 6.33341H5.83366M1.66699 14.6667H5.83366M14.167 14.6667H18.3337M14.167 6.33341H18.3337M3.48366 2.16675H16.517C17.5203 2.16675 18.3337 2.9801 18.3337 3.98341V17.0167C18.3337 18.0201 17.5203 18.8334 16.517 18.8334H3.48366C2.48034 18.8334 1.66699 18.0201 1.66699 17.0167V3.98341C1.66699 2.9801 2.48034 2.16675 3.48366 2.16675Z"
+                  stroke="#4338CA"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <p className="text-[#4338CA] italic font-extrabold ml-[8px]">
+                Movie Z
+              </p>
+            </div>
+          </Link>
+        </div>
+
+        <div className="flex justify-center sm:w-auto w-full">
+          <div className="sm:block hidden">
+            <GenreTrigger genres={genres}></GenreTrigger>
+          </div>
+
+          <div className="flex items-center sm:gap-0 gap-4 w-full ">
+            <SearchButton genres={genres}></SearchButton>
+
+            <Suspense fallback={<SkeletonSearch />}>
+              <div className="sm:block hidden">
+                <SearchSection toggler={false}></SearchSection>
+              </div>
+            </Suspense>
           </div>
         </div>
-        <ThemeToggler></ThemeToggler>
+        <div className="sm:block hidden">
+          <ThemeToggler></ThemeToggler>
+        </div>
       </nav>
     </header>
   );
 };
+function setTheme(arg0: string): void {
+  throw new Error("Function not implemented.");
+}

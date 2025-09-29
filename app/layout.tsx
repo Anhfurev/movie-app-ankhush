@@ -39,7 +39,7 @@ export default function RootLayout({
             <Header></Header>
           </header>
 
-          <main className="z-0">{children}</main>
+          <main className="z-0 m-0">{children}</main>
 
           <Footer />
         </ThemeProvider>

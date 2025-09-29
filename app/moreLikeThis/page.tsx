@@ -1,6 +1,4 @@
 import { MovieCard } from "@/components/my";
-import { movieResponseType } from "@/type/MovieResponseType";
-import { getMoviesByGenreId } from "@/utils/getData";
 import {
   Pagination,
   PaginationContent,
@@ -10,32 +8,28 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-type GenrePageProps = {
+import { movieResponseType } from "@/type/MovieResponseType";
+import { getMovieDetail, getMoviesBySame1 } from "@/utils/getData";
+import React from "react";
+
+type moreLikeThisProps = {
   searchParams: Promise<{ id: string; name: string; page: string }>;
 };
 
-const Genre = async ({ searchParams }: GenrePageProps) => {
+const page = async ({ searchParams }: moreLikeThisProps) => {
   const params = await searchParams;
   const id = params.id;
-  const name = params.name;
+
   const page = params.page || "1";
-  let a = [];
-
-  const filteredMoviesResponse: movieResponseType = await getMoviesByGenreId(
-    id,
-    page
-  );
-
-  const howManyMovies: number = filteredMoviesResponse.total_pages;
-  console.log(howManyMovies);
-
-  const url = `/genre?id=${id}&name=${name}`;
+  const similarMovies: movieResponseType = await getMoviesBySame1(id, page);
+  const MovieDetail: movieResponseType = await getMovieDetail(id);
+  const url = `/moreLikeThis?id=${id}`;
 
   return (
-    <div className="mt-30 max-w-[1280px] m-auto">
-      <h2 className="text-[24px] font-bold flex justify-start">{name}</h2>
-      <div className="flex justify-between w-[1280px] m-auto mt-[32px] flex-wrap gap-8">
-        {filteredMoviesResponse.results.map((movie) => (
+    <div className="sm:w-[1280px] w-auto flex justify-center flex-col m-auto">
+      <h1 className="text-[24px] font-bold flex justify-start sm:mt-20 sm:ml-0 ml-5 mt-14">{`"${MovieDetail.title}" Same movies`}</h1>
+      <div className="flex  sm:w-[1280px] flex-wrap sm:justify-between justify-center m-auto sm:gap-[30px] gap-[18px] w-auto sm:ml-0 ml-5 sm:mr-0 mr-5 mt-3 sm:mt-0">
+        {similarMovies.results.map((movie) => (
           <MovieCard
             id={movie.id}
             key={movie.id}
@@ -45,7 +39,7 @@ const Genre = async ({ searchParams }: GenrePageProps) => {
           />
         ))}
       </div>
-      <Pagination className="flex justify-end mt-[32px]">
+      <Pagination className="flex justify-center mt-[32px]">
         <PaginationContent>
           <PaginationItem>
             <PaginationPrevious href={`${url}&page=${Number(page) - 1}`} />
@@ -87,9 +81,11 @@ const Genre = async ({ searchParams }: GenrePageProps) => {
           <PaginationItem>
             <PaginationEllipsis />
           </PaginationItem>
-          <PaginationItem>
-            <PaginationLink href={`${url}&page=100`}>100</PaginationLink>
-          </PaginationItem>
+          {Number(page) !== 100 && (
+            <PaginationItem>
+              <PaginationLink href={`${url}&page=100`}>100</PaginationLink>
+            </PaginationItem>
+          )}
           <PaginationItem>
             <PaginationNext href={`${url}&page=${Number(page) + 1}`} />
           </PaginationItem>
@@ -99,4 +95,4 @@ const Genre = async ({ searchParams }: GenrePageProps) => {
   );
 };
 
-export default Genre;
+export default page;
