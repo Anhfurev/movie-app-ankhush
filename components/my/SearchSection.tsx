@@ -67,9 +67,9 @@ export const SearchSection = (toggler: any) => {
           onOpenAutoFocus={(e) => e.preventDefault()}
           onCloseAutoFocus={(e) => e.preventDefault()}
           align="start"
-          className="sm:w-[577px] w-fit h-fit p-5 rounded-md border mt-[7px] bg-white dark:bg-black sm:block hidden"
+          className="sm:w-[577px] w-fit h-fit p-5 rounded-md border mt-[7px] ml-[-18px] bg-white dark:bg-black sm:block hidden"
         >
-          <div className="gap-4 flex flex-col justify-center">
+          <div className="gap-4  flex-col justify-center sm:flex hidden">
             {loader ? (
               <LoaderCircle className="m-auto animate-spin" />
             ) : foundMovies === null ? (
@@ -78,7 +78,12 @@ export const SearchSection = (toggler: any) => {
               foundMovies?.results.slice(0, 5).map((movie, i) => {
                 return (
                   <div key={i} className="flex gap-4 justify-between">
-                    <Link key={i} href={`/seeMore/${movie.id}`}>
+                    <Link
+                      onClick={() => {
+                        setIsOpen(false); // close the popover manually
+                      }}
+                      href={`/seeMore/${movie.id}`}
+                    >
                       <div className="flex">
                         <div className="w-[67px] h-[100px]">
                           <img
@@ -147,7 +152,7 @@ export const SearchSection = (toggler: any) => {
           onOpenAutoFocus={(e) => e.preventDefault()}
           onCloseAutoFocus={(e) => e.preventDefault()}
           align="center"
-          className="bg-background border rounded-md p-5"
+          className="bg-background border rounded-md p-5 sm:hidden block"
         >
           <div className="gap-4 flex flex-col justify-center w-full">
             {loader ? (
