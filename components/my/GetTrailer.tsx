@@ -19,13 +19,15 @@ export const GetTrailer = ({
     <div>
       <Dialog>
         <DialogTrigger asChild>
-          <button className="flex items-center sm:bg-background bg-foreground py-[8px] px-[16px] rounded-[6px] gap-[8px] mt-[20px]">
+          <button className="flex items-center sm:bg-background bg-foreground lg:w-[150px] w-[124px]  lg:h-[40px] h-[34px] py-[8px] px-[16px] rounded-[6px] gap-[8px] mt-[20px]">
             <Play
               width={14}
               className="sm:text-foreground text-background"
               strokeWidth={1.5}
             />
-            <p className="sm:text-foreground text-background">Watch Trailer</p>
+            <p className="sm:text-foreground text-background lg:text-[14px] text-[11px] lg:mr-[-2 0px]">
+              Watch Trailer
+            </p>
           </button>
         </DialogTrigger>
         <DialogContent className="p-0 sm:max-w-[1080px] w-auto sm:max-h-[600px] h-60% border-0">

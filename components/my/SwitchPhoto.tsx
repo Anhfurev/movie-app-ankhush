@@ -43,10 +43,10 @@ export const SwitchPhoto = ({ move }: any) => {
             <CarouselCard key={el.id} el={el} />
           ))}
         </CarouselContent>
-        <CarouselPrevious className="left-10 sm:flex items-center justify-center hidden" />
-        <CarouselNext className="right-10 sm:flex items-center justify-center hidden" />
+        <CarouselPrevious className="lg:left-10 left-6 sm:flex items-center justify-center hidden" />
+        <CarouselNext className="lg:right-10 right-6 sm:flex items-center justify-center hidden" />
       </Carousel>
-      <div className="relative justify-center flex sm:mt-[-50px] mt-[-325px] m-auto">
+      <div className="relative justify-center flex sm:mt-[-50px] mt-[-305px] m-auto">
         <div className="flex gap-2 justify-center m-auto ">
           {Array.from({ length: count }).map((_, index) => (
             <div
@@ -92,11 +92,11 @@ const CarouselCard = ({ el }: { el: MovieType }) => {
               alt=""
             />
 
-            <div className="absolute text-white left-80 mt-[-160px] sm:block hidden">
-              <p className="text-white text-[16px] mb-0 font-medium">
+            <div className="absolute text-white lg:left-[12%] left-[10%] lg:mt-[-10%] mt-[-5%]  sm:block hidden">
+              <p className="text-white lg:text-[16px] text-[14px] mb-0 font-medium">
                 Now Playing:
               </p>
-              <h1 className="font-extrabold text-[50px] mt-[-10px]">
+              <h1 className="lg:text-[50px] font-extrabold text-[30px] mt-[-10px]">
                 {el.title}
               </h1>
               <div className="flex items-center text-[18px]">
@@ -119,7 +119,9 @@ const CarouselCard = ({ el }: { el: MovieType }) => {
                 <p className="ml-1">{el.vote_average}</p>
                 <p className="text-muted-foreground">/10</p>
               </div>
-              <p className="w-[500px] mt-[20px]">{el.overview}</p>
+              <p className="lg:w-[500px] w-[400px] lg:text-[20px] text-[16px] lg:mt-[20px] mt-[13px]">
+                {el.overview}
+              </p>
 
               <GetTrailer
                 youtubeKey={selectedTrailer}
@@ -139,7 +141,7 @@ const CarouselCard = ({ el }: { el: MovieType }) => {
               <p className=" sm:text-[16px] text-[14px] mb-0 font-medium">
                 Now Playing:
               </p>
-              <h1 className="font-bold text-[24px] w-fit mt-[-3] h-fit">
+              <h1 className="font-bold lg:text-[24px] w-fit text mt-[-3] h-fit">
                 {el.title}
               </h1>
             </div>

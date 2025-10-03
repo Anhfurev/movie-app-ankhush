@@ -35,9 +35,6 @@ export const SearchSection = (toggler: any) => {
     }
     SetLoader(false);
     SetFoundMovies(foundData);
-    {
-      console.log(foundMovies);
-    }
   };
 
   return (
@@ -66,6 +63,7 @@ export const SearchSection = (toggler: any) => {
         <PopoverContent
           onOpenAutoFocus={(e) => e.preventDefault()}
           onCloseAutoFocus={(e) => e.preventDefault()}
+          onInteractOutside={(e) => e.preventDefault()}
           align="start"
           className="sm:w-[577px] w-fit h-fit p-5 rounded-md border mt-[7px] ml-[-18px] bg-white dark:bg-black sm:block hidden"
         >
@@ -126,7 +124,10 @@ export const SearchSection = (toggler: any) => {
                         </div>
                       </div>
                     </Link>
-                    <Link href={`/searchMore?&search=${searchValue}`}>
+                    <Link
+                      onClick={() => setIsOpen(false)}
+                      href={`/searchMore?&search=${searchValue}`}
+                    >
                       <button className="flex items-center px-[16px] py-[8px] pr-[0px]">
                         <p>See more</p>
                         <ArrowRight className="w-4 ml-2 mt-[2px]" />
@@ -206,7 +207,10 @@ export const SearchSection = (toggler: any) => {
                         </div>
                       </div>
                     </Link>
-                    <Link href={`/searchMore?&search=${searchValue}`}>
+                    <Link
+                      onClick={() => setIsOpen(false)}
+                      href={`/searchMore?&search=${searchValue}`}
+                    >
                       <button className="flex items-center px-[16px] py-[8px] pr-[0px]">
                         <p>See more</p>
                         <ArrowRight className="w-4 ml-2 mt-[2px]" />
