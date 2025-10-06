@@ -1,27 +1,45 @@
+"use client";
+
 import { ChevronDown, Moon, Search, Sun } from "lucide-react";
+
 import React, { Suspense } from "react";
+
 import { ThemeToggler } from "./ThemeToggler";
 
 import { Badge } from "@/components/my";
+
 import { Separator } from "../ui/separator";
+
 import Link from "next/link";
-import { SearchSection } from "./SearchSection";
+
+import SearchSection from "./SearchSection";
+
 import { SkeletonSearch } from "./SkeletonSearch";
 
 import { SearchButton } from "./SearchButton";
+
 import { GenreTrigger } from "./genreTrigger";
+
 import { getMovieGenres } from "@/utils/getData";
 
-export const Header = async () => {
-  const data = await getMovieGenres();
-  const genres = data.genres;
+export const Header = () => {
+  const [genres, setGenres] = React.useState<any[]>([]);
+
+  React.useEffect(() => {
+    async function fetchGenres() {
+      const data = await getMovieGenres();
+
+      setGenres(data.genres);
+    }
+
+    fetchGenres();
+  }, []);
 
   return (
     <header className="flex relative justify-center z-20">
       <nav className="h-[59px] justify-between m-auto flex items-center sm:w-[1280px] w-full">
         <div className="sm:flex hidden">
           <Link href={"/"}>
-            {" "}
             <div className="items-center sm:ml-0 ml-4 flex flex-row w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -43,18 +61,15 @@ export const Header = async () => {
             </div>
           </Link>
         </div>
-
         <div className="flex justify-center sm:w-auto w-full">
           <div className="sm:block hidden">
             <GenreTrigger genres={genres}></GenreTrigger>
           </div>
-
-          <div className="flex items-center sm:gap-0 gap-4 w-full ">
+          <div className="flex items-center sm:gap-0 gap-4 w-full">
             <SearchButton genres={genres}></SearchButton>
-
             <Suspense fallback={<SkeletonSearch />}>
               <div className="sm:block hidden">
-                <SearchSection toggler={false}></SearchSection>
+                <SearchSection toggler={true}></SearchSection>
               </div>
             </Suspense>
           </div>
@@ -66,6 +81,3 @@ export const Header = async () => {
     </header>
   );
 };
-function setTheme(arg0: string): void {
-  throw new Error("Function not implemented.");
-}

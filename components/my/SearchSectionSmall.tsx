@@ -72,10 +72,10 @@ export default function SearchSection({ toggler }: { toggler: boolean }) {
       <PopoverContent
         onOpenAutoFocus={(e) => e.preventDefault()}
         onCloseAutoFocus={(e) => e.preventDefault()}
-        align="start"
-        className="sm:w-[577px] w-fit h-fit p-5 rounded-md border mt-[7px] ml-[-18px] bg-white dark:bg-black sm:block hidden"
+        align="center"
+        className="sm:w-[577px] w-[90vw] h-full p-5 rounded-md border mt-[7px] ml-[-18px] bg-white dark:bg-black"
       >
-        <div className="gap-4 flex-col justify-center sm:flex hidden">
+        <div className="gap-4 flex-col justify-center sm:flex">
           {loader ? (
             <LoaderCircle className="m-auto animate-spin" />
           ) : foundMovies?.results.length ? (

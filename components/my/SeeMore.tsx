@@ -94,57 +94,50 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
           </div>
         </div>
       </div>
-      <div className="sm:gap-8 gap-0 mt-[24px] flex">
-        <div className="sm:w-[340px] w-fit sm:h-[511px] h-fit rounded-1">
+      <div className="flex flex-col sm:flex-row gap-6 mt-6">
+        <div className="sm:w-[27.5%] w-full rounded-lg overflow-hidden">
           <img
-            className="sm:block hidden"
+            className="w-full h-auto object-cover rounded-lg"
             src={
               MovieDetail.poster_path
-                ? `https://image.tmdb.org/t/p/original/${MovieDetail.poster_path}`
+                ? `https://image.tmdb.org/t/p/original${MovieDetail.poster_path}`
                 : "https://images.squarespace-cdn.com/content/v1/61b7a2c705855c798750b051/1639699939145-AJZ5O6AOME163WJ32ILA/p_800x1200_emptymanthe_en_121520.jpg"
             }
             alt=""
           />
         </div>
-        <div className="sm:w-[908px] w-fit  rounded-1">
+        <div className="sm:w-[908px] w-full rounded-lg relative">
           <Dialog>
             <DialogTrigger>
-              <div className="sm:w-[908px] w-fit relative">
-                <div className="absolute  z-20 flex gap-3 items-center bottom-5 left-4">
-                  <div className=" bg-white w-10 h-10 rounded-full flex justify-center items-center">
-                    <Play className="items-center w-[17px] text-black" />
-                  </div>
-                  <h1 className="text-white">Play trailer</h1>
-                  <h1 className="text-white">
-                    <span>2</span>:<span>35</span>
-                  </h1>
-                </div>
+              <div className="relative w-full h-0 pb-[56.25%] cursor-pointer rounded-lg overflow-hidden">
                 <img
-                  className="w-full h-full object-cover"
+                  className="absolute top-0 left-0 w-full h-full object-cover"
                   src={
                     MovieDetail.backdrop_path
-                      ? `https://image.tmdb.org/t/p/original/${MovieDetail.backdrop_path}`
+                      ? `https://image.tmdb.org/t/p/original${MovieDetail.backdrop_path}`
                       : "https://images.squarespace-cdn.com/content/v1/61b7a2c705855c798750b051/1639699939145-AJZ5O6AOME163WJ32ILA/p_800x1200_emptymanthe_en_121520.jpg"
                   }
                   alt=""
                 />
+                <div className="absolute bottom-5 left-4 flex items-center gap-3 bg-black bg-opacity-50 rounded-full px-3 py-1 text-white">
+                  <div className="bg-white w-10 h-10 rounded-full flex justify-center items-center">
+                    <Play className="w-5 text-black" />
+                  </div>
+                  <h1>Play trailer</h1>
+                  <h1>
+                    <span>2</span>:<span>35</span>
+                  </h1>
+                </div>
               </div>
             </DialogTrigger>
-            <DialogContent className="p-0 sm:w-[1080px] w-[630px] sm:max-h-[600px] border-0 mr-5 overflow-x-auto">
+            <DialogContent className="p-0 sm:max-w-[1080px] max-w-full max-h-[600px] border-0 mr-5 overflow-auto">
               <DialogTitle className="hidden"></DialogTitle>
               {za.length > 0 ? (
                 <iframe
-                  width={520}
-                  height={340}
+                  className="w-full h-[340px] sm:h-[480px]"
                   src={`https://www.youtube.com/embed/${za[0].key}`}
                   title="YouTube video player"
-                  allow="accelerometer; 
-  autoplay; 
-  clipboard-write; 
-  encrypted-media; 
-  gyroscope; 
-  picture-in-picture; 
-  web-share"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
               ) : (
@@ -154,6 +147,7 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
           </Dialog>
         </div>
       </div>
+
       <div className="mt-[32px] gap-5 flex flex-col">
         <div className="sm:hidden flex sm:gap-0 gap-4 items-start">
           <img
@@ -186,16 +180,6 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
           </div>
         </div>
         <div className="sm:flex hidden sm:gap-0 gap-4 items-start">
-          <img
-            className="block flex-shrink-0 w-[100px] h-[148px] mt-0 ml-5"
-            src={
-              MovieDetail.poster_path
-                ? `https://image.tmdb.org/t/p/original/${MovieDetail.poster_path}`
-                : "https://images.squarespace-cdn.com/content/v1/61b7a2c705855c798750b051/1639699939145-AJZ5O6AOME163WJ32ILA/p_800x1200_emptymanthe_en_121520.jpg"
-            }
-            alt=""
-          />
-
           <div className="flex flex-col gap-2 h-fit">
             <div className="flex flex-wrap gap-2 ml-3">
               {MovieDetail?.genres.map((genre: any) => (

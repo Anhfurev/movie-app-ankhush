@@ -2,10 +2,11 @@
 import { ChevronDown, Search, X } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import { SearchSection } from "./SearchSection";
+import SearchSection from "./SearchSection";
 import Link from "next/link";
 import { ThemeToggler } from "./ThemeToggler";
 import { GenreTrigger } from "./genreTrigger";
+import SearchSectionSmall from "./SearchSectionSmall";
 
 export const SearchButton = ({ genres }: any) => {
   console.log(genres);
@@ -19,7 +20,7 @@ export const SearchButton = ({ genres }: any) => {
             <GenreTrigger genres={genres}></GenreTrigger>
           </div>
           <div className="sm:hidden block justify-center">
-            <SearchSection toggler={toggler}></SearchSection>
+            <SearchSectionSmall toggler={toggler}></SearchSectionSmall>
           </div>
           <div className="sm:hidden flex items-center mr-[20px]">
             <button
