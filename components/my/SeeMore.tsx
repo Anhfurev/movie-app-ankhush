@@ -31,15 +31,26 @@ type TypeofPerson = {
   name: string;
   job: string;
 };
+type TypeOfCast = {
+  id: number;
+  name: string;
+};
+type TrailerType = {
+  name: string;
+  key: string;
+};
+
 const SeeMore = async ({ id }: DetailDynamicPageProps) => {
   const similarMovies: movieResponseType = await getMoviesBySame(id);
   const MovieDetail: MovieType = await getMovieDetail(id);
   const MovieDirector = await getMovieDirector(id);
   const Trailer = await getMovieVideo(id);
 
-  const za = Trailer.results.filter((trail: any) =>
+  const officialTrailer = Trailer.results.find((trail: TrailerType) =>
     trail.name.includes("Official Trailer")
   );
+  const anyTrailer = Trailer.results.length > 0 ? Trailer.results[0] : null;
+  const trailerToPlay = officialTrailer || anyTrailer;
 
   return (
     <div className="mt-14 sm:max-w-[1280px] w-auto m-auto">
@@ -132,16 +143,18 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
             </DialogTrigger>
             <DialogContent className="p-0 sm:max-w-[1080px] max-w-full max-h-[600px] border-0 mr-5 overflow-auto">
               <DialogTitle className="hidden"></DialogTitle>
-              {za.length > 0 ? (
+              {trailerToPlay ? (
                 <iframe
                   className="w-full h-[340px] sm:h-[480px]"
-                  src={`https://www.youtube.com/embed/${za[0].key}`}
+                  src={`https://www.youtube.com/embed/${trailerToPlay.key}`}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
                 ></iframe>
               ) : (
-                ""
+                <div className="w-full h-[340px] sm:h-[480px] flex items-center justify-center bg-black text-white">
+                  No trailer available.
+                </div>
               )}
             </DialogContent>
           </Dialog>
@@ -149,9 +162,9 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
       </div>
 
       <div className="mt-[32px] gap-5 flex flex-col">
-        <div className="sm:hidden flex sm:gap-0 gap-4 items-start">
+        <div className="sm:hidden flex gap-4 items-start ml-5 mr-5">
           <img
-            className="block flex-shrink-0 w-[100px] h-[148px] mt-0 ml-5"
+            className="block flex-shrink-0 w-[100px] h-[148px] rounded-md"
             src={
               MovieDetail.poster_path
                 ? `https://image.tmdb.org/t/p/original/${MovieDetail.poster_path}`
@@ -160,19 +173,19 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
             alt=""
           />
 
-          <div className="flex flex-col gap-2 h-fit">
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col gap-2 min-w-0">
+            <div className="flex flex-nowrap gap-2 overflow-x-auto pb-2">
               {MovieDetail?.genres.map((genre: any) => (
                 <Badge
                   key={genre.id}
-                  className="bg-white text-foreground border dark:text-black border-border rounded-[9px] h-4 w-fit"
+                  className="bg-white text-foreground border dark:text-black border-border rounded-[9px] h-4 w-fit flex-shrink-0"
                 >
                   {genre.name}
                 </Badge>
               ))}
             </div>
 
-            <div className="sm:hidden flex mr-5">
+            <div className="sm:hidden flex">
               <p className="text-foreground text-[16px]">
                 {MovieDetail.overview}
               </p>
@@ -206,7 +219,8 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
             <p className="relative">
               {MovieDirector.crew
                 .filter((person: TypeofPerson) => person.job === "Director")
-                .map((person: TypeofPerson) => person.name)}
+                .map((person: TypeofPerson) => person.name)
+                .join(", ") || "N/A"}
             </p>
           </div>
           <Separator></Separator>
@@ -214,21 +228,22 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
             <h1 className="w-16 font-bold">Writors</h1>
             <p className="relative">
               {MovieDirector.crew
-                .filter((person: TypeofPerson) => person.job === "Writing")
-                .map((person: TypeofPerson) => person.name)}
+                .filter(
+                  (person: TypeofPerson) =>
+                    person.department === "Writing" && person.job === "Writer"
+                )
+                .map((person: TypeofPerson) => person.name)
+                .join(", ") || "N/A"}
             </p>
           </div>
           <Separator></Separator>
           <div className="flex gap-14 ">
             <h1 className="w-16 font-bold">Stars</h1>
             <p className="relative">
-              {MovieDirector.crew
-                .filter(
-                  (person: TypeofPerson) => person.department === "Editing"
-                )
-                .map((person: TypeofPerson, i: number) =>
-                  i !== 0 ? ", " + person.name : person.name
-                )}
+              {MovieDirector.cast
+                .slice(0, 5)
+                .map((person: TypeOfCast) => person.name)
+                .join(", ") || "N/A"}
             </p>
           </div>
           <Separator></Separator>
@@ -245,7 +260,7 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
       </Link>
 
       <div>
-        <div className="hidden justify-between sm:w-[1280px] w-fit m-auto sm:mt-[32px] mt-0 flex-wrap gap-8 overflow-scroll sm:flex">
+        <div className="hidden sm:flex justify-between sm:w-[1280px] w-fit m-auto sm:mt-[32px] mt-0 flex-nowrap gap-8 overflow-x-auto">
           {similarMovies.results.slice(0, 5).map((movie) => (
             <MovieCard
               id={movie.id}
@@ -256,7 +271,7 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
             />
           ))}
         </div>
-        <div className="flex justify-between sm:w-[1280px] w-fit m-auto sm:mt-[32px] mt-6 flex-wrap gap-8 overflow-scroll sm:hidden">
+        <div className="flex sm:hidden justify-between w-full m-auto mt-6 flex-nowrap gap-4 overflow-x-auto px-5">
           {similarMovies.results.slice(0, 2).map((movie) => (
             <MovieCard
               id={movie.id}

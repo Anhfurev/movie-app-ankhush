@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MovieCard, SwitchPhoto } from "@/components/my";
 import { MovieType } from "@/type/MovieType";
 import { movieResponseType } from "@/type/MovieResponseType";
