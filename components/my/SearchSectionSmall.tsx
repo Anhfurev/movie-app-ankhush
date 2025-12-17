@@ -14,11 +14,12 @@ import { getMovieSearch } from "@/utils/getData";
 
 import { movieResponseType } from "@/type/MovieResponseType";
 
-import { ArrowRight, LoaderCircle, Search } from "lucide-react";
+import { LoaderCircle, Search } from "lucide-react";
 
 import Link from "next/link";
 
 import { Separator } from "../ui/separator";
+import Image from "next/image";
 
 export default function SearchSection({ toggler }: { toggler: boolean }) {
   const [searchValue, setSearchValue] = useState("");
@@ -87,7 +88,7 @@ export default function SearchSection({ toggler }: { toggler: boolean }) {
                 >
                   <div className="flex">
                     <div className="w-[67px] h-[100px]">
-                      <img
+                      <Image
                         width={67}
                         height={100}
                         src={
@@ -121,7 +122,7 @@ export default function SearchSection({ toggler }: { toggler: boolean }) {
         <Separator className="mt-4" />
         <h1 className="mt-4">
           <a href={`/searchMore?&search=${searchValue}`}>
-            See all results for '{searchValue}'
+            See all results for `{searchValue}``
           </a>
         </h1>
       </PopoverContent>

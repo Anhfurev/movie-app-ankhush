@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { MovieCard, SwitchPhoto } from "@/components/my";
+import { SwitchPhoto } from "@/components/my";
 import GenreOfMovie from "@/components/my/GenreOfMovie";
 import { movieResponseType } from "@/type/MovieResponseType";
 

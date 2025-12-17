@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
@@ -11,8 +13,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { GetTrailer } from "@/components/my/GetTrailer";
-import { getMovieDetail, getMovieVideo } from "@/utils/getData";
+import { getMovieVideo } from "@/utils/getData";
 import { MovieType } from "@/type/MovieType";
+import Image from "next/image";
 
 export const SwitchPhoto = ({ move }: any) => {
   const [api, setApi] = React.useState<CarouselApi>();
@@ -86,7 +89,7 @@ const CarouselCard = ({ el }: { el: MovieType }) => {
           className={`rounded-none h-[60vw] w-full p-0 md:h-[100vw]border-0 shadow-none items-center flex`}
         >
           <CardContent className="flex relative  items-center justify-center p-0   h-100%  w-full h-full sm:mt-0 mt-4">
-            <img
+            <Image
               className="object-cover h-full w-full"
               src={`https://image.tmdb.org/t/p/original/${el.backdrop_path}`}
               alt=""

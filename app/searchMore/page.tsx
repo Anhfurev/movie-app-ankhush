@@ -22,7 +22,7 @@ type MoreLikeThisProps = {
 };
 async function Page({ searchParams }: MoreLikeThisProps) {
   const genres = await getMovieGenres();
-  const id = searchParams.id || "";
+
   const search = searchParams.search || "";
   const page = searchParams.page || "1";
   const PopularMovies: movieResponseType = await getMovieSearchMore(
@@ -33,7 +33,7 @@ async function Page({ searchParams }: MoreLikeThisProps) {
   return (
     <div className="w-[1280px] flex justify-center flex-col m-auto">
       <h2 className="text-[24px] font-bold flex justify-start mt-20">
-        "{search}" Results
+        `{search}` Results
       </h2>
       <div className="flex gap-5">
         <div className="flex justify-between w-[1280px] m-auto mt-[32px] flex-wrap gap-8 overflow-scroll border-r pr-8">

@@ -1,4 +1,3 @@
-import { getMovieVideo } from "@/utils/getData";
 import { Play } from "lucide-react";
 import React from "react";
 import {
@@ -10,7 +9,6 @@ import {
 
 export const GetTrailer = ({
   youtubeKey,
-  backdrop_path,
 }: {
   youtubeKey: string | undefined;
   backdrop_path: string;

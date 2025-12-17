@@ -19,7 +19,6 @@ const Genre = async ({ searchParams }: GenrePageProps) => {
   const id = params.id;
   const name = params.name;
   const page = params.page || "1";
-  let a = [];
 
   const filteredMoviesResponse: movieResponseType = await getMoviesByGenreId(
     id,

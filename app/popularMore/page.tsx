@@ -9,7 +9,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import { movieResponseType } from "@/type/MovieResponseType";
-import { getMovieDetail, getMoviesBySame1 } from "@/utils/getData";
+
 import React from "react";
 
 type moreLikeThisProps = {

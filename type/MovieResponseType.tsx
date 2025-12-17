@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { MovieType } from "./MovieType";
 
 export type movieResponseType = {

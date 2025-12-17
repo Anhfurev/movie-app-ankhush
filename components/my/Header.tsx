@@ -1,14 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-
-import { ChevronDown, Moon, Search, Sun } from "lucide-react";
 
 import React, { Suspense } from "react";
 
 import { ThemeToggler } from "./ThemeToggler";
-
-import { Badge } from "@/components/my";
-
-import { Separator } from "../ui/separator";
 
 import Link from "next/link";
 

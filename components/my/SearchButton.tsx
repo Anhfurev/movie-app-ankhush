@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { ChevronDown, Search, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "../ui/button";
-import SearchSection from "./SearchSection";
+
 import Link from "next/link";
 import { ThemeToggler } from "./ThemeToggler";
 import { GenreTrigger } from "./genreTrigger";

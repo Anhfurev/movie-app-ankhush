@@ -7,7 +7,6 @@ import {
 import { ChevronDown } from "lucide-react";
 import React from "react";
 import { Badge } from "./Badge";
-import { Button } from "../ui/button";
 
 type typeOfMe = {
   genres: { id: string; name: string }[];
