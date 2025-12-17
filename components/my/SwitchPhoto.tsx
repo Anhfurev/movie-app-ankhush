@@ -15,7 +15,6 @@ import {
 import { GetTrailer } from "@/components/my/GetTrailer";
 import { getMovieVideo } from "@/utils/getData";
 import { MovieType } from "@/type/MovieType";
-import Image from "next/image";
 
 export const SwitchPhoto = ({ move }: any) => {
   const [api, setApi] = React.useState<CarouselApi>();
@@ -89,7 +88,7 @@ const CarouselCard = ({ el }: { el: MovieType }) => {
           className={`rounded-none h-[60vw] w-full p-0 md:h-[100vw]border-0 shadow-none items-center flex`}
         >
           <CardContent className="flex relative  items-center justify-center p-0   h-100%  w-full h-full sm:mt-0 mt-4">
-            <Image
+            <img
               className="object-cover h-full w-full"
               src={`https://image.tmdb.org/t/p/original/${el.backdrop_path}`}
               alt=""

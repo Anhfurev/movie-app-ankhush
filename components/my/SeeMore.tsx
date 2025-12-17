@@ -18,7 +18,7 @@ import { MovieCard } from "./Moviecard";
 import { movieResponseType } from "@/type/MovieResponseType";
 import { MovieType } from "@/type/MovieType";
 import Link from "next/link";
-import Image from "next/image";
+
 type DetailDynamicPageProps = {
   id: string;
 };
@@ -107,7 +107,7 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
       </div>
       <div className="flex flex-col sm:flex-row gap-6 mt-6">
         <div className="sm:w-[27.5%] w-full rounded-lg overflow-hidden">
-          <Image
+          <img
             className="w-full h-auto object-cover rounded-lg"
             src={
               MovieDetail.poster_path
@@ -121,7 +121,7 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
           <Dialog>
             <DialogTrigger>
               <div className="relative w-full h-0 pb-[56.25%] cursor-pointer rounded-lg overflow-hidden">
-                <Image
+                <img
                   className="absolute top-0 left-0 w-full h-full object-cover"
                   src={
                     MovieDetail.backdrop_path
@@ -163,7 +163,7 @@ const SeeMore = async ({ id }: DetailDynamicPageProps) => {
 
       <div className="mt-[32px] gap-5 flex flex-col">
         <div className="sm:hidden flex gap-4 items-start ml-5 mr-5">
-          <Image
+          <img
             className="block flex-shrink-0 w-[100px] h-[148px] rounded-md"
             src={
               MovieDetail.poster_path
